@@ -1,0 +1,78 @@
+﻿@model Magenta.Models.Products
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Products</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Foil)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Foil)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cover)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cover)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Folding)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Folding)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CoverRefinement)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CoverRefinement)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.InsideRefinement)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.InsideRefinement)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Binding)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Binding)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Paper)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Paper)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.InsideColor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.InsideColor)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

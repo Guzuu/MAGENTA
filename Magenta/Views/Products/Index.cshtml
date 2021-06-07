@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Magenta.Models.Products>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cover)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Folding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoverRefinement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InsideRefinement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Binding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InsideColor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Foil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cover)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Folding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoverRefinement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InsideRefinement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Binding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paper)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InsideColor)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
