@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Magenta.DAL;
+using Microsoft.AspNetCore.Identity;
 
 namespace Magenta
 {
@@ -29,6 +30,7 @@ namespace Magenta
 
             services.AddDbContext<DefaultContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultContext")));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DefaultContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

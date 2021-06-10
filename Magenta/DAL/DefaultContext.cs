@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Magenta.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Magenta.DAL
 {
-    public class DefaultContext : DbContext
+    public class DefaultContext : IdentityDbContext
     {
         public DefaultContext()
         {
