@@ -78,6 +78,30 @@ namespace Magenta
                 //Create the roles and seed them to the database 
                 roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
             }
+            roleCheck = await RoleManager.RoleExistsAsync("OfficeWorker");
+            if (!roleCheck)
+            {
+                //Create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("OfficeWorker"));
+            }
+            roleCheck = await RoleManager.RoleExistsAsync("GraphicDesigner");
+            if (!roleCheck)
+            {
+                //Create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("GraphicDesigner"));
+            }
+            roleCheck = await RoleManager.RoleExistsAsync("BookBinder");
+            if (!roleCheck)
+            {
+                //Create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("BookBinder"));
+            }
+            roleCheck = await RoleManager.RoleExistsAsync("Printer");
+            if (!roleCheck)
+            {
+                //Create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Printer"));
+            }
 
             // Assign Admin role to newly registered user
             IdentityUser user = await UserManager.FindByEmailAsync("Admin@nonexistingdomain.pl");

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Magenta.DAL;
 using Magenta.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Magenta.Controllers
 {
+    [Authorize(Roles = "Admin,BookBinder")]
     public class WorksController : Controller
     {
         private readonly DefaultContext _context;
