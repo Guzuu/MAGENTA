@@ -24,7 +24,7 @@ namespace Magenta.Controllers
         // GET: Works
         public async Task<IActionResult> Index()
         {
-            var defaultContext = _context.Works.Include(w => w.Department).Include(w => w.ProcessedBy).Include(w => w.Project).Include(w => w.WorkType);
+            var defaultContext = _context.Works.Include(w => w.Project).Include(w => w.WorkType);
             return View(await defaultContext.ToListAsync());
         }
 
@@ -37,8 +37,6 @@ namespace Magenta.Controllers
             }
 
             var works = await _context.Works
-                .Include(w => w.Department)
-                .Include(w => w.ProcessedBy)
                 .Include(w => w.Project)
                 .Include(w => w.WorkType)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -53,8 +51,6 @@ namespace Magenta.Controllers
         // GET: Works/Create
         public IActionResult Create()
         {
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id");
-            ViewData["ProcessedById"] = new SelectList(_context.Employees, "Id", "Id");
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id");
             ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Id");
             return View();
@@ -65,7 +61,7 @@ namespace Magenta.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AmountProcessed,AdditionalInfo,DateProcessed,ProjectId,WorkTypeId,DepartmentId,ProcessedById")] Works works)
+        public async Task<IActionResult> Create([Bind("Id,AmountProcessed,AdditionalInfo,DateProcessed,ProjectId,WorkTypeId,ProcessedById")] Works works)
         {
             if (ModelState.IsValid)
             {
@@ -73,8 +69,6 @@ namespace Magenta.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id", works.DepartmentId);
-            ViewData["ProcessedById"] = new SelectList(_context.Employees, "Id", "Id", works.ProcessedById);
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", works.ProjectId);
             ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Id", works.WorkTypeId);
             return View(works);
@@ -93,8 +87,6 @@ namespace Magenta.Controllers
             {
                 return NotFound();
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id", works.DepartmentId);
-            ViewData["ProcessedById"] = new SelectList(_context.Employees, "Id", "Id", works.ProcessedById);
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", works.ProjectId);
             ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Id", works.WorkTypeId);
             return View(works);
@@ -105,7 +97,7 @@ namespace Magenta.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AmountProcessed,AdditionalInfo,DateProcessed,ProjectId,WorkTypeId,DepartmentId,ProcessedById")] Works works)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AmountProcessed,AdditionalInfo,DateProcessed,ProjectId,WorkTypeId,ProcessedById")] Works works)
         {
             if (id != works.Id)
             {
@@ -132,8 +124,6 @@ namespace Magenta.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id", works.DepartmentId);
-            ViewData["ProcessedById"] = new SelectList(_context.Employees, "Id", "Id", works.ProcessedById);
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", works.ProjectId);
             ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Id", works.WorkTypeId);
             return View(works);
@@ -148,8 +138,6 @@ namespace Magenta.Controllers
             }
 
             var works = await _context.Works
-                .Include(w => w.Department)
-                .Include(w => w.ProcessedBy)
                 .Include(w => w.Project)
                 .Include(w => w.WorkType)
                 .FirstOrDefaultAsync(m => m.Id == id);

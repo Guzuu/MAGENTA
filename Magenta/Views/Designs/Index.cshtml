@@ -22,10 +22,10 @@
                 @Html.DisplayNameFor(model => model.AttatchmentsPath)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Project)
+                @Html.DisplayNameFor(model => model.DesignedBy)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DesignedBy)
+                @Html.DisplayNameFor(model => model.Project)
             </th>
             <th></th>
         </tr>
@@ -43,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.AttatchmentsPath)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Project.Id)
+                @Html.DisplayFor(modelItem => item.DesignedBy.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DesignedBy.Id)
+                @Html.DisplayFor(modelItem => item.Project.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

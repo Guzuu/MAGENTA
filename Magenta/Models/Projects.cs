@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +19,6 @@ namespace Magenta.Models
         public int AddedById { get; set; }
 
         public virtual Products Product { get; set; }
-        public virtual Employees AddedBy { get; set; }
+        public virtual IdentityUser AddedBy { get; set; }
     }
 }

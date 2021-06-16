@@ -38,52 +38,56 @@
                             <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
                         </ul>
                     }
-                <ul class="nav navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item mr-4">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Admin
-                            </a>
-                            <div class="dropdown-menu bg-darkgrey" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-light" href="#">Action</a>
-                                <a class="dropdown-item text-light" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-light" href="#">Something else here</a>
-                            </div>
-                        </li>
-                    }
-                    @if (User.IsInRole("Admin") || User.IsInRole("OfficeWorker"))
-                    {
+                    <ul class="nav navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Projects" asp-action="Index">
-                                Projects <span class="sr-only">(current)</span>
-                            </a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                    }
-                    @if (User.IsInRole("Admin") || User.IsInRole("GraphicDesigner"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Designs" asp-action="Index">
-                                Graphic Designs <span class="sr-only">(current)</span>
-                            </a>
+                        <li class="nav-item border-right">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                    }
-                    @if (User.IsInRole("Admin") || User.IsInRole("BookBinder") || User.IsInRole("Printer"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Works" asp-action="Index">
-                                Works <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                    }
-                </ul>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <div class="dropdown-menu bg-darkgrey" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-light" asp-area="" asp-controller="" asp-action="Index">Users</a>
+                                    <a class="dropdown-item text-light" asp-area="" asp-controller="" asp-action="Index">Roles</a>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin") || User.IsInRole("OfficeWorker"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Office
+                                </a>
+                                <div class="dropdown-menu bg-darkgrey" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-light" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
+                                    <a class="dropdown-item text-light" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                                    <a class="dropdown-item text-light" asp-area="" asp-controller="WorkTypes" asp-action="Index">WorkTypes</a>
+                                    <a class="dropdown-item text-light" asp-area="" asp-controller="Machines" asp-action="Index">Machines</a>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin") || User.IsInRole("GraphicDesigner"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Designs" asp-action="Index">
+                                    Graphic Designs <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin") || User.IsInRole("BookBinder") || User.IsInRole("Printer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Works" asp-action="Index">
+                                    Works <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>

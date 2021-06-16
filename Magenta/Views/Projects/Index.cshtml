@@ -8,7 +8,6 @@
 
 <p>
     <a asp-action="Create">Create New</a>
-    <a asp-action="Import">Import</a>
 </p>
 <table class="table">
     <thead>
@@ -32,10 +31,10 @@
                 @Html.DisplayNameFor(model => model.AttatchmentsPath)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product)
+                @Html.DisplayNameFor(model => model.AddedById)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AddedBy)
+                @Html.DisplayNameFor(model => model.Product)
             </th>
             <th></th>
         </tr>
@@ -62,10 +61,10 @@
                 @Html.DisplayFor(modelItem => item.AttatchmentsPath)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Id)
+                @Html.DisplayFor(modelItem => item.AddedById)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AddedBy.Id)
+                @Html.DisplayFor(modelItem => item.Product.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

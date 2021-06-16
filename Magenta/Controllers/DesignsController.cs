@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Magenta.Controllers
 {
-
     [Authorize(Roles = "Admin,GraphicDesigner")]
     public class DesignsController : Controller
     {
@@ -25,7 +24,7 @@ namespace Magenta.Controllers
         // GET: Designs
         public async Task<IActionResult> Index()
         {
-            var defaultContext = _context.Designs.Include(d => d.DesignedBy).Include(d => d.Project);
+            var defaultContext = _context.Designs.Include(d => d.Project).Include(d => d.DesignedBy);
             return View(await defaultContext.ToListAsync());
         }
 
@@ -38,8 +37,8 @@ namespace Magenta.Controllers
             }
 
             var designs = await _context.Designs
-                .Include(d => d.DesignedBy)
                 .Include(d => d.Project)
+                .Include(d => d.DesignedBy)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (designs == null)
             {
@@ -52,8 +51,8 @@ namespace Magenta.Controllers
         // GET: Designs/Create
         public IActionResult Create()
         {
-            ViewData["DesignedById"] = new SelectList(_context.Employees, "Id", "Id");
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id");
+            ViewData["DesignedById"] = new SelectList(_context.Users, "UserName", "UserName");
             return View();
         }
 
@@ -70,8 +69,8 @@ namespace Magenta.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DesignedById"] = new SelectList(_context.Employees, "Id", "Id", designs.DesignedById);
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", designs.ProjectId);
+            ViewData["DesignedById"] = new SelectList(_context.Users, "UserName", "UserName", designs.DesignedById);
             return View(designs);
         }
 
@@ -88,8 +87,8 @@ namespace Magenta.Controllers
             {
                 return NotFound();
             }
-            ViewData["DesignedById"] = new SelectList(_context.Employees, "Id", "Id", designs.DesignedById);
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", designs.ProjectId);
+            ViewData["DesignedById"] = new SelectList(_context.Users, "UserName", "UserName", designs.DesignedById);
             return View(designs);
         }
 
@@ -125,8 +124,8 @@ namespace Magenta.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DesignedById"] = new SelectList(_context.Employees, "Id", "Id", designs.DesignedById);
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", designs.ProjectId);
+            ViewData["DesignedById"] = new SelectList(_context.Users, "UserName", "UserName", designs.DesignedById);
             return View(designs);
         }
 
@@ -139,8 +138,8 @@ namespace Magenta.Controllers
             }
 
             var designs = await _context.Designs
-                .Include(d => d.DesignedBy)
                 .Include(d => d.Project)
+                .Include(d => d.DesignedBy)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (designs == null)
             {

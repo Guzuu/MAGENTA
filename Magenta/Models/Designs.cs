@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Magenta.Models
 {
@@ -15,6 +16,6 @@ namespace Magenta.Models
         public int DesignedById { get; set; }
 
         public virtual Projects Project { get; set; }
-        public virtual Employees DesignedBy { get; set; }
+        public virtual IdentityUser DesignedBy { get; set; }
     }
 }

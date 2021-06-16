@@ -22,16 +22,13 @@
                 @Html.DisplayNameFor(model => model.DateProcessed)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ProcessedById)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Project)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.WorkType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProcessedBy)
             </th>
             <th></th>
         </tr>
@@ -49,16 +46,13 @@
                 @Html.DisplayFor(modelItem => item.DateProcessed)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.ProcessedById)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Project.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.WorkType.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProcessedBy.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

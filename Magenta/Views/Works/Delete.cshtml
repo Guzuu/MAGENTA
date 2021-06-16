@@ -30,6 +30,12 @@
             @Html.DisplayFor(model => model.DateProcessed)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProcessedById)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProcessedById)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Project)
         </dt>
         <dd class = "col-sm-10">
@@ -40,18 +46,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.WorkType.Id)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Department.Id)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProcessedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProcessedBy.Id)
         </dd class>
     </dl>
     
