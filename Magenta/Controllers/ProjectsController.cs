@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Magenta.DAL;
 using Magenta.Models;
 using Microsoft.AspNetCore.Authorization;
+using ExcelDataReader;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace Magenta.Controllers
 {
@@ -26,6 +29,39 @@ namespace Magenta.Controllers
         {
             var defaultContext = _context.Projects.Include(p => p.AddedBy).Include(p => p.Product);
             return View(await defaultContext.ToListAsync());
+        }
+
+        [HttpPost]
+        public IActionResult Index(IFormCollection form)
+        {
+            List<Projects> projects = new List<Projects>();
+            var fileName = "./projects.xlsx";
+            // For .net core, the next line requires the NuGet package, 
+            // System.Text.Encoding.CodePages
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+            {
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                {
+
+                    while (reader.Read()) //Each row of the file
+                    {
+                        projects.Add(new Projects
+                        {
+                            Id = reader.GetInt32(0),
+                            OrderedQuantity = reader.GetInt32(1),
+                            Description = reader.GetValue(2).ToString(),
+                            DateAdded = reader.GetDateTime(3),
+                            DateDeadline = reader.GetDateTime(4),
+                            Status = reader.GetValue(5).ToString(),
+                            AttatchmentsPath = reader.GetValue(6).ToString(),
+                            ProductId = reader.GetInt32(7),
+                            AddedById = reader.GetInt32(8)
+                        });
+                    }
+                }
+            }
+            return View(projects);
         }
 
         // GET: Projects/Details/5

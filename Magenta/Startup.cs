@@ -106,6 +106,14 @@ namespace Magenta
             // Assign Admin role to newly registered user
             IdentityUser user = await UserManager.FindByEmailAsync("Admin@nonexistingdomain.pl");
             await UserManager.AddToRoleAsync(user, "Admin");
+            user = await UserManager.FindByEmailAsync("OfficeWorker@nonexistingdomain.pl");
+            await UserManager.AddToRoleAsync(user, "OfficeWorker");
+            user = await UserManager.FindByEmailAsync("Printer@nonexistingdomain.pl");
+            await UserManager.AddToRoleAsync(user, "Printer");
+            user = await UserManager.FindByEmailAsync("BookBinder@nonexistingdomain.pl");
+            await UserManager.AddToRoleAsync(user, "BookBinder");
+            user = await UserManager.FindByEmailAsync("GraphicDesigner@nonexistingdomain.pl");
+            await UserManager.AddToRoleAsync(user, "GraphicDesigner");
         }
     }
 }

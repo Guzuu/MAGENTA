@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Magenta.Controllers
 {
-    [Authorize(Roles = "Admin,BookBinder")]
+    [Authorize(Roles = "Admin,BookBinder,Printer")]
     public class WorksController : Controller
     {
         private readonly DefaultContext _context;
