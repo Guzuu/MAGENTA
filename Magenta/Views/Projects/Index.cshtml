@@ -4,11 +4,15 @@
     ViewData["Title"] = "Projects";
 }
 
-<h1>Projects</h1>
+<h1>
+    @using (Html.BeginRouteForm("Import", FormMethod.Post))
+    {
+        <label for="projects" class="text-magenta">Projects</label>
+        <a class="btn btn-magenta ml-3" asp-action="Create">Create New</a>
+        <input type="submit" class="btn btn-magenta ml-3" value="Import" />
+    }
+</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table text-lgrey">
     <thead>
         <tr>
@@ -40,38 +44,40 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderedQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateAdded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateDeadline)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AttatchmentsPath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddedBy.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderedQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAdded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateDeadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AttatchmentsPath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddedBy.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Export" asp-route-id="@item.Id">Export</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

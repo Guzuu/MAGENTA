@@ -31,39 +31,41 @@ namespace Magenta.Controllers
             return View(await defaultContext.ToListAsync());
         }
 
+        //[Route("")]
+        //[Route("Projects", Order = 2)]
+        //[Route("Projects/Index")]
+        //[HttpGet]
+        //public IActionResult Index(IFormCollection form)
+        //{
+        //    List<Projects> projects = new List<Projects>();
+        //    var fileName = "./projects.xlsx";
+        //    // For .net core, the next line requires the NuGet package, 
+        //    // System.Text.Encoding.CodePages
+        //    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+        //    using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+        //    {
+        //        using (var reader = ExcelReaderFactory.CreateReader(stream))
+        //        {
 
-        [HttpPost]
-        public IActionResult Index(IFormCollection form)
-        {
-            List<Projects> projects = new List<Projects>();
-            var fileName = "./projects.xlsx";
-            // For .net core, the next line requires the NuGet package, 
-            // System.Text.Encoding.CodePages
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
-            {
-                using (var reader = ExcelReaderFactory.CreateReader(stream))
-                {
-
-                    while (reader.Read()) //Each row of the file
-                    {
-                        projects.Add(new Projects
-                        {
-                            Id = reader.GetInt32(0),
-                            OrderedQuantity = reader.GetInt32(1),
-                            Description = reader.GetValue(2).ToString(),
-                            DateAdded = reader.GetDateTime(3),
-                            DateDeadline = reader.GetDateTime(4),
-                            Status = reader.GetValue(5).ToString(),
-                            AttatchmentsPath = reader.GetValue(6).ToString(),
-                            ProductId = reader.GetInt32(7),
-                            AddedById = reader.GetValue(8).ToString()
-                        });
-                    }
-                }
-            }
-            return View(projects);
-        }
+        //            while (reader.Read()) //Each row of the file
+        //            {
+        //                projects.Add(new Projects
+        //                {
+        //                    Id = int.Parse(reader.GetValue(0).ToString()),
+        //                    OrderedQuantity = int.Parse(reader.GetValue(1).ToString()),
+        //                    Description = reader.GetValue(2).ToString(),
+        //                    DateAdded = reader.GetDateTime(3),
+        //                    DateDeadline = reader.GetDateTime(4),
+        //                    Status = reader.GetValue(5).ToString(),
+        //                    AttatchmentsPath = reader.GetValue(6).ToString(),
+        //                    ProductId = int.Parse(reader.GetValue(7).ToString()),
+        //                    AddedById = reader.GetValue(8).ToString()
+        //                });
+        //            }
+        //        }
+        //    }
+        //    return View(projects);
+        //}
 
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -109,6 +111,47 @@ namespace Magenta.Controllers
             ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", projects.ProductId);
             ViewData["AddedById"] = new SelectList(_context.Users, "Id", "UserName", projects.AddedById);
             return View(projects);
+        }
+
+        [Route("")]
+        [Route("Projects")]
+        [Route("Projects/Create")]
+        [HttpPost]
+        public async Task<IActionResult> Create(IFormCollection form)
+        {
+            Projects projects = new Projects();
+            var fileName = "./projects.xlsx";
+            // For .net core, the next line requires the NuGet package, 
+            // System.Text.Encoding.CodePages
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+            {
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                {
+
+                    while (reader.Read()) //Each row of the file
+                    {
+                        projects = new Projects
+                        {
+                            OrderedQuantity = int.Parse(reader.GetValue(1).ToString()),
+                            Description = reader.GetValue(2).ToString(),
+                            DateAdded = reader.GetDateTime(3),
+                            DateDeadline = reader.GetDateTime(4),
+                            Status = reader.GetValue(5).ToString(),
+                            AttatchmentsPath = reader.GetValue(6).ToString(),
+                            ProductId = int.Parse(reader.GetValue(7).ToString()),
+                            AddedById = reader.GetValue(8).ToString()
+                        };
+
+                        if (ModelState.IsValid)
+                        {
+                            _context.Add(projects);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Projects/Edit/5

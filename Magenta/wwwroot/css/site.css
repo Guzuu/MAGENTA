@@ -16,23 +16,23 @@ a {
 
 .btn-magenta {
     color: white;
-    background-color: #ca1367;
+    background-color: #c30e6f;
     border-color: #d4d4d4;
 }
 
 .btn-magenta:hover {
     color: white;
-    background-color: #a1115f;
+    background-color: #891552;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
     color: #fff;
-    background-color: #ca1367;
+    background-color: #e50a7f;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #d4d4d4;
-    background-color: #ca1367;
+    background-color: #e50a7f;
     border-color: #d4d4d4;
 }
 
@@ -109,7 +109,7 @@ header {
 }
 
 .text-magenta {
-    color: #f15ea1;
+    color: #e50a7f;
 }
 
 .text-lgrey {
