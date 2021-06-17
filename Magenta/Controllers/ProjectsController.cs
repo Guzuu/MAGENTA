@@ -27,7 +27,7 @@ namespace Magenta.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
-            var defaultContext = _context.Projects.Include(p => p.Product);
+            var defaultContext = _context.Projects.Include(p => p.Product).Include(d => d.AddedBy);
             return View(await defaultContext.ToListAsync());
         }
 
@@ -75,6 +75,7 @@ namespace Magenta.Controllers
 
             var projects = await _context.Projects
                 .Include(p => p.Product)
+                .Include(d => d.AddedBy)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (projects == null)
             {
@@ -87,7 +88,8 @@ namespace Magenta.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id");
+            ViewData["ProductId"] = new SelectList(_context.Products, "Name", "Name");
+            ViewData["AddedById"] = new SelectList(_context.Users, "UserName", "UserName");
             return View();
         }
 
@@ -104,7 +106,8 @@ namespace Magenta.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id", projects.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Name", "Name", projects.ProductId);
+            ViewData["AddedById"] = new SelectList(_context.Users, "UserName", "UserName", projects.AddedById);
             return View(projects);
         }
 
@@ -121,7 +124,8 @@ namespace Magenta.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id", projects.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Name", "Name", projects.ProductId);
+            ViewData["AddedById"] = new SelectList(_context.Users, "UserName", "UserName", projects.AddedById);
             return View(projects);
         }
 
@@ -157,7 +161,8 @@ namespace Magenta.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id", projects.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Name", "Name", projects.ProductId);
+            ViewData["AddedById"] = new SelectList(_context.Users, "UserName", "UserName", projects.AddedById);
             return View(projects);
         }
 
@@ -171,6 +176,7 @@ namespace Magenta.Controllers
 
             var projects = await _context.Projects
                 .Include(p => p.Product)
+                .Include(d => d.AddedBy)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (projects == null)
             {

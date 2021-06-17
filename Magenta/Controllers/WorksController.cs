@@ -24,7 +24,7 @@ namespace Magenta.Controllers
         // GET: Works
         public async Task<IActionResult> Index()
         {
-            var defaultContext = _context.Works.Include(w => w.Project).Include(w => w.WorkType);
+            var defaultContext = _context.Works.Include(w => w.Project).Include(w => w.WorkType).Include(w => w.ProcessedBy);
             return View(await defaultContext.ToListAsync());
         }
 
@@ -52,7 +52,8 @@ namespace Magenta.Controllers
         public IActionResult Create()
         {
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id");
-            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Id");
+            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Name", "Name");
+            ViewData["ProcessedById"] = new SelectList(_context.Users, "UserName", "UserName");
             return View();
         }
 
@@ -70,7 +71,8 @@ namespace Magenta.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", works.ProjectId);
-            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Id", works.WorkTypeId);
+            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Name", "Name", works.WorkTypeId);
+            ViewData["ProcessedById"] = new SelectList(_context.Users, "UserName", "UserName", works.ProcessedById);
             return View(works);
         }
 
@@ -88,7 +90,8 @@ namespace Magenta.Controllers
                 return NotFound();
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", works.ProjectId);
-            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Id", works.WorkTypeId);
+            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Name", "Name", works.WorkTypeId);
+            ViewData["ProcessedById"] = new SelectList(_context.Users, "UserName", "UserName", works.ProcessedById);
             return View(works);
         }
 
@@ -125,7 +128,8 @@ namespace Magenta.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", works.ProjectId);
-            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Id", works.WorkTypeId);
+            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Name", "Name", works.WorkTypeId);
+            ViewData["ProcessedById"] = new SelectList(_context.Users, "UserName", "UserName", works.ProcessedById);
             return View(works);
         }
 

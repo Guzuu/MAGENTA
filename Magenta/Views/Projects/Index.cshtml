@@ -31,7 +31,7 @@
                 @Html.DisplayNameFor(model => model.AttatchmentsPath)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AddedById)
+                @Html.DisplayNameFor(model => model.AddedBy)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Product)
@@ -61,7 +61,7 @@
                 @Html.DisplayFor(modelItem => item.AttatchmentsPath)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AddedById)
+                @Html.DisplayFor(modelItem => item.AddedBy.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Id)

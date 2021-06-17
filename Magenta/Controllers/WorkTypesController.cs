@@ -50,7 +50,7 @@ namespace Magenta.Controllers
         // GET: WorkTypes/Create
         public IActionResult Create()
         {
-            ViewData["MachineId"] = new SelectList(_context.Machines, "Id", "Id");
+            ViewData["MachineId"] = new SelectList(_context.Machines, "Name", "Name");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace Magenta.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MachineId"] = new SelectList(_context.Machines, "Id", "Id", workTypes.MachineId);
+            ViewData["MachineId"] = new SelectList(_context.Machines, "Name", "Name", workTypes.MachineId);
             return View(workTypes);
         }
 
@@ -84,7 +84,7 @@ namespace Magenta.Controllers
             {
                 return NotFound();
             }
-            ViewData["MachineId"] = new SelectList(_context.Machines, "Id", "Id", workTypes.MachineId);
+            ViewData["MachineId"] = new SelectList(_context.Machines, "Name", "Name", workTypes.MachineId);
             return View(workTypes);
         }
 
@@ -120,7 +120,7 @@ namespace Magenta.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MachineId"] = new SelectList(_context.Machines, "Id", "Id", workTypes.MachineId);
+            ViewData["MachineId"] = new SelectList(_context.Machines, "Name", "Name", workTypes.MachineId);
             return View(workTypes);
         }
 

@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.DateProcessed)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProcessedById)
+                @Html.DisplayNameFor(model => model.ProcessedBy)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Project)
@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.DateProcessed)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProcessedById)
+                @Html.DisplayFor(modelItem => item.ProcessedBy.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Project.Id)

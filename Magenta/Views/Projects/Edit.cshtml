@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="AddedById" class="control-label"></label>
-                <input asp-for="AddedById" class="form-control" />
+                <select asp-for="AddedById" class="form-control" asp-items="ViewBag.AddedById"></select>
                 <span asp-validation-for="AddedById" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProcessedById" class="control-label"></label>
-                <input asp-for="ProcessedById" class="form-control" />
+                <select asp-for="ProcessedById" class="form-control" asp-items="ViewBag.ProcessedById"></select>
                 <span asp-validation-for="ProcessedById" class="text-danger"></span>
             </div>
             <div class="form-group">
