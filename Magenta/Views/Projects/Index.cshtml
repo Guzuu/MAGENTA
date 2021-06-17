@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Projects";
 }
-<form class="mb-2" asp-controller="Projects" asp-action="Import" method="post" enctype="multipart/form-data">
+<form asp-controller="Projects" asp-action="Import" method="post" enctype="multipart/form-data">
     <label class="h1 text-magenta">Projects</label>
     <a class="btn btn-magenta ml-3 mb-2" asp-action="Create">Create New</a>
     <input type="submit" name="Import" value="Import" id="btnImport" class="btn btn-magenta ml-3 mb-2" />
@@ -76,7 +76,6 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Export" asp-route-id="@item.Id">Export</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>

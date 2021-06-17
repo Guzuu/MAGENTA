@@ -135,6 +135,10 @@ namespace Magenta.Controllers
             {
 
             }
+            catch (InvalidCastException)
+            {
+
+            }
 
             return RedirectToAction(nameof(Index));
         }

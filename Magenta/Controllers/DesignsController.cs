@@ -8,17 +8,22 @@ using Microsoft.EntityFrameworkCore;
 using Magenta.DAL;
 using Magenta.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Magenta.Controllers
 {
     [Authorize(Roles = "Admin,GraphicDesigner")]
     public class DesignsController : Controller
     {
-        private readonly DefaultContext _context;
+        private readonly DefaultContext _context; 
+        private IWebHostEnvironment _hostingEnvironment;
 
-        public DesignsController(DefaultContext context)
+        public DesignsController(DefaultContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _hostingEnvironment = environment;
         }
 
         // GET: Designs
@@ -61,10 +66,25 @@ namespace Magenta.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateDesigned,Accepted,AttatchmentsPath,ProjectId,DesignedById")] Designs designs)
+        public async Task<IActionResult> Create([Bind("Id,DateDesigned,Accepted,AttatchmentsPath,ProjectId,DesignedById")] Designs designs, IList<IFormFile> postedFiles)
         {
             if (ModelState.IsValid)
             {
+                string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                foreach (IFormFile file in postedFiles)
+                {
+                    if (file.Length > 0)
+                    {
+                        string dirPath = Path.Combine(uploads, "designs\\" + designs.ProjectId);
+                        if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
+                        string filePath = Path.Combine(dirPath, file.FileName);
+                        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                            designs.AttatchmentsPath = dirPath;
+                        }
+                    }
+                }
                 _context.Add(designs);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

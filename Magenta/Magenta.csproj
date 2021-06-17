@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\uploads\designs\1\**" />
+    <Compile Remove="wwwroot\uploads\designs\2\**" />
+    <Content Remove="wwwroot\uploads\designs\1\**" />
+    <Content Remove="wwwroot\uploads\designs\2\**" />
+    <EmbeddedResource Remove="wwwroot\uploads\designs\1\**" />
+    <EmbeddedResource Remove="wwwroot\uploads\designs\2\**" />
+    <None Remove="wwwroot\uploads\designs\1\**" />
+    <None Remove="wwwroot\uploads\designs\2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Migrations\20210606161449_BaseModels.cs" />
     <Compile Remove="Migrations\20210606161449_BaseModels.Designer.cs" />
     <Compile Remove="Migrations\20210607183833_BaseModels.cs" />
@@ -28,6 +39,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0-preview.5.21301.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\designs\" />
   </ItemGroup>
 
 </Project>

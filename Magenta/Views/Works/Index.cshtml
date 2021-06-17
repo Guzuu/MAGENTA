@@ -4,11 +4,9 @@
     ViewData["Title"] = "Works";
 }
 
-<h1>Works</h1>
+<label class="h1 text-magenta">Works</label>
+<a class="btn btn-magenta ml-3 mb-2" asp-action="Create">Create New</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table text-lgrey">
     <thead>
         <tr>
@@ -34,32 +32,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AmountProcessed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdditionalInfo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateProcessed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProcessedBy.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Project.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorkType.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AmountProcessed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdditionalInfo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateProcessed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProcessedBy.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Project.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkType.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
