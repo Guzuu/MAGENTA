@@ -13,6 +13,9 @@ using ExcelDataReader;
 using Microsoft.AspNetCore.Authorization;
 using System.Web;
 using ExcelDataReader.Exceptions;
+using ClosedXML.Excel;
+using System.Xml;
+using System.Data;
 
 namespace Magenta.Controllers
 {
@@ -32,42 +35,6 @@ namespace Magenta.Controllers
             var defaultContext = _context.Projects.Include(p => p.Product).Include(d => d.AddedBy);
             return View(await defaultContext.ToListAsync());
         }
-
-        //[Route("")]
-        //[Route("Projects", Order = 2)]
-        //[Route("Projects/Index")]
-        //[HttpGet]
-        //public IActionResult Index(IFormCollection form)
-        //{
-        //    List<Projects> projects = new List<Projects>();
-        //    var fileName = "./projects.xlsx";
-        //    // For .net core, the next line requires the NuGet package, 
-        //    // System.Text.Encoding.CodePages
-        //    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-        //    using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
-        //    {
-        //        using (var reader = ExcelReaderFactory.CreateReader(stream))
-        //        {
-
-        //            while (reader.Read()) //Each row of the file
-        //            {
-        //                projects.Add(new Projects
-        //                {
-        //                    Id = int.Parse(reader.GetValue(0).ToString()),
-        //                    OrderedQuantity = int.Parse(reader.GetValue(1).ToString()),
-        //                    Description = reader.GetValue(2).ToString(),
-        //                    DateAdded = reader.GetDateTime(3),
-        //                    DateDeadline = reader.GetDateTime(4),
-        //                    Status = reader.GetValue(5).ToString(),
-        //                    AttatchmentsPath = reader.GetValue(6).ToString(),
-        //                    ProductId = int.Parse(reader.GetValue(7).ToString()),
-        //                    AddedById = reader.GetValue(8).ToString()
-        //                });
-        //            }
-        //        }
-        //    }
-        //    return View(projects);
-        //}
 
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -115,8 +82,6 @@ namespace Magenta.Controllers
             return View(projects);
         }
 
-        [Route("")]
-        [Route("Projects")]
         [Route("Projects/Import")]
         [HttpPost]
         public async Task<IActionResult> Import(IFormFile postedFile)
@@ -162,8 +127,71 @@ namespace Magenta.Controllers
             {
 
             }
+            catch (NullReferenceException)
+            {
+
+            }
+            catch (FormatException)
+            {
+
+            }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [Route("Projects/Export")]
+        [HttpGet]
+        public IActionResult Export()
+        {
+            DataTable dt = getData();
+            //Name of File  
+            string fileName = DateTime.Today.ToString("dd-MM-yyyy")+"-Export.xlsx";
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                //Add DataTable in worksheet  
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    //Return xlsx Excel File  
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+                }
+            }
+        }
+
+        public DataTable getData()
+        {
+            //Creating DataTable  
+            DataTable dt = new DataTable();
+            //Setting Table Name  
+            dt.TableName = "Projects";
+            //Add Columns  
+            dt.Columns.Add("Id", typeof(int));
+            dt.Columns.Add("OrderedQuantity", typeof(int));
+            dt.Columns.Add("Description", typeof(string));
+            dt.Columns.Add("DateAdded", typeof(DateTime));
+            dt.Columns.Add("DateDeadline", typeof(DateTime));
+            dt.Columns.Add("Status", typeof(string));
+            dt.Columns.Add("AttatchmentsPath", typeof(string));
+            dt.Columns.Add("ProductId", typeof(int));
+            dt.Columns.Add("AddedById", typeof(string));
+            //Add Rows in DataTable
+            foreach(var project in _context.Projects)
+            {
+                dt.Rows.Add(
+                    project.Id, 
+                    project.OrderedQuantity, 
+                    project.Description, 
+                    project.DateAdded, 
+                    project.DateDeadline, 
+                    project.Status, 
+                    project.AttatchmentsPath, 
+                    project.ProductId, 
+                    project.AddedById
+                    );
+            }
+            dt.AcceptChanges();
+            return dt;
         }
 
         // GET: Projects/Edit/5
