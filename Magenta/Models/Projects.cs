@@ -16,7 +16,7 @@ namespace Magenta.Models
         public string Status { get; set; }
         public string AttatchmentsPath { get; set; }
         public int ProductId { get; set; } 
-        public int AddedById { get; set; }
+        public string AddedById { get; set; }
 
         public virtual Products Product { get; set; }
         public virtual IdentityUser AddedBy { get; set; }

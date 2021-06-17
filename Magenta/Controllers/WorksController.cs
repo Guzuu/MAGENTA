@@ -52,8 +52,8 @@ namespace Magenta.Controllers
         public IActionResult Create()
         {
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id");
-            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Name", "Name");
-            ViewData["ProcessedById"] = new SelectList(_context.Users, "UserName", "UserName");
+            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Name");
+            ViewData["ProcessedById"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -71,8 +71,8 @@ namespace Magenta.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", works.ProjectId);
-            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Name", "Name", works.WorkTypeId);
-            ViewData["ProcessedById"] = new SelectList(_context.Users, "UserName", "UserName", works.ProcessedById);
+            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Name", works.WorkTypeId);
+            ViewData["ProcessedById"] = new SelectList(_context.Users, "Id", "UserName", works.ProcessedById);
             return View(works);
         }
 
@@ -90,8 +90,8 @@ namespace Magenta.Controllers
                 return NotFound();
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", works.ProjectId);
-            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Name", "Name", works.WorkTypeId);
-            ViewData["ProcessedById"] = new SelectList(_context.Users, "UserName", "UserName", works.ProcessedById);
+            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Name", works.WorkTypeId);
+            ViewData["ProcessedById"] = new SelectList(_context.Users, "Id", "UserName", works.ProcessedById);
             return View(works);
         }
 
@@ -128,8 +128,8 @@ namespace Magenta.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", works.ProjectId);
-            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Name", "Name", works.WorkTypeId);
-            ViewData["ProcessedById"] = new SelectList(_context.Users, "UserName", "UserName", works.ProcessedById);
+            ViewData["WorkTypeId"] = new SelectList(_context.WorkTypes, "Id", "Name", works.WorkTypeId);
+            ViewData["ProcessedById"] = new SelectList(_context.Users, "Id", "UserName", works.ProcessedById);
             return View(works);
         }
 

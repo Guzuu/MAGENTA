@@ -52,7 +52,7 @@ namespace Magenta.Controllers
         public IActionResult Create()
         {
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id");
-            ViewData["DesignedById"] = new SelectList(_context.Users, "UserName", "UserName");
+            ViewData["DesignedById"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -70,7 +70,7 @@ namespace Magenta.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", designs.ProjectId);
-            ViewData["DesignedById"] = new SelectList(_context.Users, "UserName", "UserName", designs.DesignedById);
+            ViewData["DesignedById"] = new SelectList(_context.Users, "Id", "UserName", designs.DesignedById);
             return View(designs);
         }
 
@@ -88,7 +88,7 @@ namespace Magenta.Controllers
                 return NotFound();
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", designs.ProjectId);
-            ViewData["DesignedById"] = new SelectList(_context.Users, "UserName", "UserName", designs.DesignedById);
+            ViewData["DesignedById"] = new SelectList(_context.Users, "Id", "UserName", designs.DesignedById);
             return View(designs);
         }
 
@@ -125,7 +125,7 @@ namespace Magenta.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", designs.ProjectId);
-            ViewData["DesignedById"] = new SelectList(_context.Users, "UserName", "UserName", designs.DesignedById);
+            ViewData["DesignedById"] = new SelectList(_context.Users, "Id", "UserName", designs.DesignedById);
             return View(designs);
         }
 

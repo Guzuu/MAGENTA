@@ -13,7 +13,7 @@ namespace Magenta.Models
         public bool Accepted { get; set; }
         public string AttatchmentsPath { get; set; }
         public int ProjectId { get; set; }
-        public int DesignedById { get; set; }
+        public string DesignedById { get; set; }
 
         public virtual Projects Project { get; set; }
         public virtual IdentityUser DesignedBy { get; set; }

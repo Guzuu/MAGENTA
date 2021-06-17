@@ -14,7 +14,7 @@ namespace Magenta.Models
         public DateTime DateProcessed { get; set; }
         public int ProjectId { get; set; }
         public int WorkTypeId { get; set; }
-        public int ProcessedById { get; set; }
+        public string ProcessedById { get; set; }
 
         public virtual Projects Project { get; set; }
         public virtual WorkTypes WorkType { get; set; }

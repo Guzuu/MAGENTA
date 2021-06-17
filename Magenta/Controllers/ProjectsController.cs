@@ -57,7 +57,7 @@ namespace Magenta.Controllers
                             Status = reader.GetValue(5).ToString(),
                             AttatchmentsPath = reader.GetValue(6).ToString(),
                             ProductId = reader.GetInt32(7),
-                            AddedById = reader.GetInt32(8)
+                            AddedById = reader.GetValue(8).ToString()
                         });
                     }
                 }
@@ -88,8 +88,8 @@ namespace Magenta.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Products, "Name", "Name");
-            ViewData["AddedById"] = new SelectList(_context.Users, "UserName", "UserName");
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
+            ViewData["AddedById"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -106,8 +106,8 @@ namespace Magenta.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Name", "Name", projects.ProductId);
-            ViewData["AddedById"] = new SelectList(_context.Users, "UserName", "UserName", projects.AddedById);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", projects.ProductId);
+            ViewData["AddedById"] = new SelectList(_context.Users, "Id", "UserName", projects.AddedById);
             return View(projects);
         }
 
@@ -124,8 +124,8 @@ namespace Magenta.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Name", "Name", projects.ProductId);
-            ViewData["AddedById"] = new SelectList(_context.Users, "UserName", "UserName", projects.AddedById);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", projects.ProductId);
+            ViewData["AddedById"] = new SelectList(_context.Users, "Id", "UserName", projects.AddedById);
             return View(projects);
         }
 
@@ -161,8 +161,8 @@ namespace Magenta.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Name", "Name", projects.ProductId);
-            ViewData["AddedById"] = new SelectList(_context.Users, "UserName", "UserName", projects.AddedById);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", projects.ProductId);
+            ViewData["AddedById"] = new SelectList(_context.Users, "Id", "UserName", projects.AddedById);
             return View(projects);
         }
 

@@ -33,7 +33,7 @@
             @Html.DisplayNameFor(model => model.ProcessedBy)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProcessedBy.Id)
+            @Html.DisplayFor(model => model.ProcessedBy.UserName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Project)
@@ -45,7 +45,7 @@
             @Html.DisplayNameFor(model => model.WorkType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WorkType.Id)
+            @Html.DisplayFor(model => model.WorkType.Name)
         </dd class>
     </dl>
     

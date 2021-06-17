@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table text-lgrey">
     <thead>
         <tr>
             <th>
@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.AttatchmentsPath)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DesignedBy.Id)
+                @Html.DisplayFor(modelItem => item.DesignedBy.UserName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Project.Id)

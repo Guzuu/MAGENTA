@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table text-lgrey">
     <thead>
         <tr>
             <th>
@@ -61,10 +61,10 @@
                 @Html.DisplayFor(modelItem => item.AttatchmentsPath)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AddedBy.Id)
+                @Html.DisplayFor(modelItem => item.AddedBy.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Id)
+                @Html.DisplayFor(modelItem => item.Product.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
