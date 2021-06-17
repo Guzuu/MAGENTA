@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Authorization;
+using System.Web;
+using ExcelDataReader.Exceptions;
 
 namespace Magenta.Controllers
 {
@@ -115,42 +117,52 @@ namespace Magenta.Controllers
 
         [Route("")]
         [Route("Projects")]
-        [Route("Projects/Create")]
+        [Route("Projects/Import")]
         [HttpPost]
-        public async Task<IActionResult> Create(IFormCollection form)
+        public async Task<IActionResult> Import(IFormFile postedFile)
         {
             Projects projects = new Projects();
-            var fileName = "./projects.xlsx";
             // For .net core, the next line requires the NuGet package, 
             // System.Text.Encoding.CodePages
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+
+            try
             {
-                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                using (var stream = new MemoryStream())
                 {
-
-                    while (reader.Read()) //Each row of the file
+                    postedFile.CopyTo(stream);
+                    stream.Position = 0;
+                    using (var reader = ExcelReaderFactory.CreateReader(stream))
                     {
-                        projects = new Projects
-                        {
-                            OrderedQuantity = int.Parse(reader.GetValue(1).ToString()),
-                            Description = reader.GetValue(2).ToString(),
-                            DateAdded = reader.GetDateTime(3),
-                            DateDeadline = reader.GetDateTime(4),
-                            Status = reader.GetValue(5).ToString(),
-                            AttatchmentsPath = reader.GetValue(6).ToString(),
-                            ProductId = int.Parse(reader.GetValue(7).ToString()),
-                            AddedById = reader.GetValue(8).ToString()
-                        };
 
-                        if (ModelState.IsValid)
+                        while (reader.Read()) //Each row of the file
                         {
-                            _context.Add(projects);
-                            await _context.SaveChangesAsync();
+                            projects = new Projects
+                            {
+                                OrderedQuantity = int.Parse(reader.GetValue(1).ToString()),
+                                Description = reader.GetValue(2).ToString(),
+                                DateAdded = reader.GetDateTime(3),
+                                DateDeadline = reader.GetDateTime(4),
+                                Status = reader.GetValue(5).ToString(),
+                                AttatchmentsPath = reader.GetValue(6).ToString(),
+                                ProductId = int.Parse(reader.GetValue(7).ToString()),
+                                AddedById = reader.GetValue(8).ToString()
+                            };
+
+                            if (ModelState.IsValid)
+                            {
+                                _context.Add(projects);
+                                await _context.SaveChangesAsync();
+                            }
                         }
                     }
                 }
             }
+            catch(HeaderException)
+            {
+
+            }
+
             return RedirectToAction(nameof(Index));
         }
 

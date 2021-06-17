@@ -3,15 +3,16 @@
 @{
     ViewData["Title"] = "Projects";
 }
-
-<h1>
-    @using (Html.BeginRouteForm("Import", FormMethod.Post))
-    {
-        <label for="projects" class="text-magenta">Projects</label>
-        <a class="btn btn-magenta ml-3" asp-action="Create">Create New</a>
-        <input type="submit" class="btn btn-magenta ml-3" value="Import" />
-    }
-</h1>
+<form class="mb-2" asp-controller="Projects" asp-action="Import" method="post" enctype="multipart/form-data">
+    <label class="h1 text-magenta">Projects</label>
+    <a class="btn btn-magenta ml-3 mb-2" asp-action="Create">Create New</a>
+    <input type="submit" name="Import" value="Import" id="btnImport" class="btn btn-magenta ml-3 mb-2" />
+    <label for="file-upload" class="btn btn-magenta">
+        Upload File
+    </label>
+    <span id="file-upload-filename"></span>
+    <input id="file-upload" type="file" name="postedFile" class="d-none" />
+</form>
 
 <table class="table text-lgrey">
     <thead>
